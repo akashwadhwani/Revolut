@@ -1,0 +1,1 @@
+select user_id, currency, state, type, amount, MIN(t_date) as min_date from( select user_id, currency, amount/(100) as amount, state, type, datetime(Created_date) as t_date from transactions where currency = 'USD' AND Type = 'CARD_PAYMENT' ) group by user_id, currency, state, type order by min_date limit 10;
